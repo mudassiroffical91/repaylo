@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ClearRate | Free Loan Payment Calculator for US & UK</title>
+    <meta name="description" content="Estimate monthly loan payments, total interest and a year-by-year schedule. Free calculator in USD and GBP.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Newsreader:wght@500;600;700&display=swap">
+<style>
+:root{
+--ink:#12294a;
+--teal:#0f7b7d;
+--tealbg:#e6f3f3;
+--amber:#f2b134;
+--bg:#fafbfc;
+--line:#d9e0e8;
+--mut:#566478;
+--r:10px
+}
+*{
+box-sizing:border-box
+}
+html{
+scroll-behavior:smooth
+}
+body{
+margin:0;
+font:17px/1.65 "DM Sans",system-ui,sans-serif;
+color:var(--ink);
+background:var(--bg)
+}
+h1,h2,h3{
+font-family:"Newsreader",Georgia,serif;
+line-height:1.15;
+margin:0 0 .5em
+}
+h1{
+font-size:clamp(2.2rem,5vw,3.6rem);
+letter-spacing:-.02em
+}
+h2{
+font-size:1.9rem
+}
+h3{
+font-size:1.25rem
+}
+p{
+margin:0 0 1em;
+max-width:62ch
+}
+a{
+color:var(--teal)
+}
+.wrap{
+max-width:1080px;
+margin:0 auto;
+padding:0 20px
+}
+header{
+border-bottom:1px solid var(--line);
+background:#fff
+}
+header .wrap{
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+gap:8px;
+padding-top:14px;
+padding-bottom:14px
+}
+.logo{
+font:700 1.4rem "Newsreader",serif;
+color:var(--ink);
+text-decoration:none
+}
+.logo b{
+color:var(--teal)
+}
+nav a{
+margin-left:20px;
+color:var(--ink);
+text-decoration:none;
+font-weight:500;
+padding:4px 0
+}
+nav a:hover,nav a:focus{
+border-bottom:2px solid var(--amber)
+}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+outline:3px solid var(--amber);
+outline-offset:2px
+}
+.hero{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+align-items:start;
+padding:56px 0
+}
+.hero .lead{
+font-size:1.15rem;
+color:var(--mut)
+}
+.btn{
+display:inline-block;
+background:var(--ink);
+color:#fff;
+padding:12px 22px;
+border-radius:var(--r);
+text-decoration:none;
+font-weight:600;
+border:0;
+cursor:pointer;
+font-size:1rem
+}
+.btn:hover{
+background:var(--teal)
+}
+.card{
+background:#fff;
+border:1px solid var(--line);
+border-radius:var(--r);
+padding:24px
+}
+.field{
+margin-bottom:16px
+}
+label{
+display:block;
+font-weight:600;
+font-size:.92rem;
+margin-bottom:4px
+}
+input[type=number],input[type=text],input[type=email],select,textarea{
+width:100%;
+padding:10px 12px;
+border:1px solid var(--line);
+border-radius:8px;
+font:inherit;
+background:#fff;
+color:var(--ink)
+}
+input[type=range]{
+width:100%;
+accent-color:var(--teal);
+margin-top:6px
+}
+.chips{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-bottom:16px
+}
+.chip{
+border:1px solid var(--line);
+background:#fff;
+border-radius:99px;
+padding:6px 14px;
+cursor:pointer;
+font:inherit;
+font-size:.9rem;
+color:var(--ink)
+}
+.chip:hover{
+background:var(--tealbg)
+}
+.result{
+background:var(--ink);
+color:#fff;
+border-radius:var(--r);
+padding:20px;
+margin-top:8px
+}
+.result .big{
+font:600 2.6rem "Newsreader",serif;
+line-height:1
+}
+.result small{
+opacity:.8
+}
+.bar{
+height:10px;
+background:var(--amber);
+border-radius:5px;
+margin:14px 0 6px;
+overflow:hidden
+}
+.bar i{
+display:block;
+height:100%;
+background:#5ec4c6
+}
+.split{
+display:flex;
+justify-content:space-between;
+font-size:.9rem;
+gap:10px;
+flex-wrap:wrap
+}
+.sec{
+padding:48px 0;
+border-top:1px solid var(--line)
+}
+.grid3{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px
+}
+table{
+width:100%;
+border-collapse:collapse;
+font-size:.92rem
+}
+th,td{
+text-align:right;
+padding:8px 10px;
+border-bottom:1px solid var(--line)
+}
+th:first-child,td:first-child{
+text-align:left
+}
+th{
+background:var(--tealbg)
+}
+.scroll{
+overflow-x:auto
+}
+.note{
+font-size:.85rem;
+color:var(--mut);
+max-width:80ch
+}
+footer{
+background:var(--ink);
+color:#c9d4e3;
+padding:32px 0;
+margin-top:48px;
+font-size:.9rem
+}
+footer a{
+color:#fff
+}
+footer p{
+max-width:80ch
+}
+@media(max-width:800px){
+.hero,.grid3{
+grid-template-columns:1fr
+}
+.hero{
+padding:32px 0
+}
+nav a{
+margin:0 14px 0 0
+}
+}
+@media(prefers-reduced-motion:reduce){
+html{
+scroll-behavior:auto
+}
+}
+.sec{
+scroll-margin-top:12px
+}
+</style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a class="logo" href="#top">Clear<b>Rate</b>
+    </a>
+    <nav aria-label="Main">
+      <a href="#calculator">Calculator</a>
+      <a href="#how">How it works</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap" id="top">
+  <section class="hero">
+    <div>
+      <h1>Know what a loan really costs before you apply.</h1>
+      <p class="lead">Enter an amount, rate and term. See your monthly payment, total interest and full repayment in dollars or pounds.</p>
+      <a class="btn" href="#calculator">Try the calculator</a>
+    </div>
+    <div class="card" id="calculator">
+      <div id="calc" data-full="1">
+      </div>
+    </div>
+  </section>
+  <section class="sec" id="how">
+    <h2>How the payment is calculated</h2>
+    <p>We use the standard amortising loan formula. Your annual rate is split into 12 monthly parts, and each payment covers that month's interest first, with the rest reducing what you owe. Early payments are mostly interest; later ones are mostly principal.</p>
+    <div class="grid3">
+      <div>
+        <h3>Shorter term</h3>
+        <p>Higher monthly payment, much less total interest.</p>
+      </div>
+      <div>
+        <h3>Lower APR</h3>
+        <p>Helps most on long loans like mortgages.</p>
+      </div>
+      <div>
+        <h3>Extra payments</h3>
+        <p>Paying extra early saves the most, since interest is highest at the start.</p>
+      </div>
+    </div>
+    <p class="note">Estimates exclude fees, insurance, taxes and early repayment charges.</p>
+  </section>
+  <section class="sec" id="about">
+    <h2>About ClearRate</h2>
+    <p>ClearRate is a free tool that helps people in the United States and the United Kingdom understand borrowing costs before talking to a lender. We don't sell loans or collect your financial details. The calculator runs in your browser, so the amounts you enter stay on your device.</p>
+  </section>
+  <section class="sec" id="contact" style="max-width:620px">
+    <h2>Contact us</h2>
+    <p>Questions or found an error? Send a message. We can't give personal financial advice or loan quotes.</p>
+    <form class="card" name="contact" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="contact">
+      <div class="field">
+        <label for="n">Name</label>
+        <input id="n" name="name" type="text" required>
+      </div>
+      <div class="field">
+        <label for="e">Email</label>
+        <input id="e" name="email" type="email" required>
+      </div>
+      <div class="field">
+        <label for="m">Message</label>
+        <textarea id="m" name="message" rows="5" required>
+        </textarea>
+      </div>
+      <button class="btn" type="submit">Send message</button>
+    </form>
+  </section>
+</main>
+<footer>
+  <div class="wrap">
+    <p>
+      <b>Disclaimer:</b> ClearRate provides general information and estimates only. Results are not a loan offer, credit decision or financial advice. Actual rates, fees and terms depend on your lender and your credit profile. ClearRate is not a lender or broker.</p>
+      <p>&copy; 2026 ClearRate.</p>
+    </div>
+  </footer>
+<script>
+(function(){
+var box=document.getElementById('calc');
+if(!box)return;
+var full=box.dataset.full==='1';
+box.innerHTML='<div class="chips" aria-label="Loan presets"><button type="button" class="chip" data-p="15000,11.5,4">Personal loan</button><button type="button" class="chip" data-p="30000,7.2,5">Auto loan</button><button type="button" class="chip" data-p="300000,6.7,30">Mortgage</button></div>'+
+'<div class="field"><label for="cur">Currency</label><select id="cur"><option value="USD">US dollar ($)</option><option value="GBP">British pound (£)</option></select></div>'+
+'<div class="field"><label for="amt">Loan amount</label><input id="amt" type="number" min="500" step="500" value="25000"><input id="amtR" type="range" min="500" max="500000" step="500" value="25000" aria-label="Loan amount slider"></div>'+
+'<div class="field"><label for="rate">Interest rate (APR %)</label><input id="rate" type="number" min="0.1" max="40" step="0.1" value="8.5"><input id="rateR" type="range" min="0.1" max="40" step="0.1" value="8.5" aria-label="Interest rate slider"></div>'+
+'<div class="field"><label for="yrs">Term (years)</label><input id="yrs" type="number" min="1" max="40" step="1" value="5"><input id="yrsR" type="range" min="1" max="40" step="1" value="5" aria-label="Term slider"></div>'+
+'<div class="result" aria-live="polite"><small>Estimated monthly payment</small><div class="big" id="pmt"></div><div class="bar"><i id="pbar"></i></div><div class="split"><span>Principal: <b id="prin"></b></span><span>Total interest: <b id="int"></b></span><span>Total repaid: <b id="tot"></b></span></div></div>'+
+(full?'<h3 style="margin-top:28px">Year-by-year schedule</h3><div class="scroll"><table><thead><tr><th>Year</th><th>Principal paid</th><th>Interest paid</th><th>Balance</th></tr></thead><tbody id="sched"></tbody></table></div>':'');
+var $=function(i){
+return document.getElementById(i)
+}
+;
+['amt','rate','yrs'].forEach(function(k){
+$(k).addEventListener('input',function(){
+$(k+'R').value=$(k).value;
+calc()
+}
+);
+$(k+'R').addEventListener('input',function(){
+$(k).value=$(k+'R').value;
+calc()
+}
+);
+}
+);
+$('cur').addEventListener('change',calc);
+box.querySelectorAll('.chip').forEach(function(b){
+b.addEventListener('click',function(){
+var p=b.dataset.p.split(',');
+['amt','rate','yrs'].forEach(function(k,i){
+$(k).value=p[i];
+$(k+'R').value=p[i]
+}
+);
+calc()
+}
+)
+}
+);
+function calc(){
+var P=+$('amt').value,a=+$('rate').value,y=+$('yrs').value;
+if(!(P>0&&a>0&&y>0))return;
+var cur=$('cur').value,loc=cur==='GBP'?'en-GB':'en-US';
+var f=function(v){
+return new Intl.NumberFormat(loc,{
+style:'currency',currency:cur,maximumFractionDigits:0
+}
+).format(v)
+}
+;
+var f2=function(v){
+return new Intl.NumberFormat(loc,{
+style:'currency',currency:cur
+}
+).format(v)
+}
+;
+var r=a/1200,n=Math.round(y*12),m=P*r/(1-Math.pow(1+r,-n)),t=m*n;
+$('pmt').textContent=f2(m);
+$('prin').textContent=f(P);
+$('int').textContent=f(t-P);
+$('tot').textContent=f(t);
+$('pbar').style.width=(P/t*100).toFixed(1)+'%';
+if(full){
+var bal=P,rows='',pp=0,ip=0;
+for(var i=1;
+i<=n;
+i++){
+var it=bal*r,pr=m-it;
+bal=Math.max(bal-pr,0);
+pp+=pr;
+ip+=it;
+if(i%12===0||i===n){
+rows+='<tr><td>'+Math.ceil(i/12)+'</td><td>'+f(pp)+'</td><td>'+f(ip)+'</td><td>'+f(bal)+'</td></tr>';
+pp=0;
+ip=0
+}
+}
+$('sched').innerHTML=rows
+}
+}
+calc();
+}
+)();
+</script>
+</body>
+</html>
